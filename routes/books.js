@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const booksController = require('../controllers/booksController')
 
 /* GET books listing. */
-router.get('/', (req, res, next) => {
-  res.json({books: [{title: 'The Bible'}]});
-});
+router
+  .get('/', booksController.index)
+  .get('/:id', booksController.show)
 
 module.exports = router;
