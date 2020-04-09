@@ -15,7 +15,7 @@ after((done) => {
   server.close(done);
 });
 
-beforeEach( async () => {
+beforeEach(async () => {
   await factory.createMany("Book", 2, [
     { id: 100, title: "Learn NodeJS with Thomas" },
     { id: 900, title: "Learn NodeJS with Thomas - The Sequel" },
@@ -45,7 +45,6 @@ describe("GET /api/v1/books", () => {
 });
 
 describe("GET /api/v1/books/:id", () => {
-
   it("responds with a single book", async () => {
     response = await request.get("/api/v1/books/100");
     expect(response.body.book.id).to.equal(100);
@@ -56,5 +55,10 @@ describe("GET /api/v1/books/:id", () => {
     expect(response.body.book.title).to.equal(
       "Learn NodeJS with Thomas - The Sequel"
     );
+  });
+
+  it("responds with a single book - including author", async () => {
+    response = await request.get("/api/v1/books/900");
+    expect(response.body.book.author.fullName).to.equal("Johan Bons");
   });
 });
