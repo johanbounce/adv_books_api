@@ -58,9 +58,9 @@ describe("GET /api/v1/books/:id", () => {
       "Learn NodeJS with Thomas - The Sequel"
     );
   });
-  
+
   it("responds with a single book - author", async () => {
     response = await request.get("/api/v1/books/900");
-    expect(response.body.book.AuthorId).to.equal(10);
+    expect(response.body.book.Author.firstName).to.equal("Thomas");
   });
 });
